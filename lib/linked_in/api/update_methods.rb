@@ -57,6 +57,18 @@ module LinkedIn
         }
         post(path, message.to_json, "Content-Type" => "application/json")
       end
+      
+      def search_company(company_id)
+        path = "/companies/" + company_id.to_s + ":(id,name,ticker,description,website-url,twitter-id,locations:(address,contact-info:(phone1)))"
+        get(path, {})
+      end
+      
+      def search_company_products(company_id)
+        path = "/companies/" + company_id.to_s + "/products:(id,name,type,logo-url,description,features,product-category,website-url,disclaimer)"
+        Rails.logger.debug "ANTESSS DEL REQUESTTTTTTTTTTTtt:  " + path.inspect
+        get(path, {})
+        
+      end
       #
       # def clear_status
       #   path = "/people/~/current-status"
